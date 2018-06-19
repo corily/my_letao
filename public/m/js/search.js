@@ -1,95 +1,77 @@
-/*初始化区域滚动组件*/
-mui('.mui-scroll-wrapper').scroll({
-    indicators:false
-});
 $(function(){
-    /*都会和localStorage打交道   约定一个键  leTaoHistory */
 
-    /*1渲染列表*/
-    /*获取*/
-    var historyList = getHistoryData();
-    /*渲染*/
-    $('.lt_history').html(template('historyTpl',{list:historyList}));
-    $('.search_input').val('');
+    // 将历史记录存在localStorage的historyData中,读取localStorage中的historyData数据
+    function getHistoryData(){
+        var historyData = localStorage.getItem("historyData");
+        var historyArr = JSON.parse(historyData || '[]');
+        return historyArr;
+    }
 
-    /*2点击搜索*/
-    $('.search_btn').on('tap',function(){
-        /*获取关键字*/
-        var key = $.trim($('.search_input').val());
-        /*如果用户没有输入*/
-        if(!key){
-            /*提示*/
-            mui.toast('请输入关键字');
-            return false;
-        }
-        /*记录这一次的搜索*/
-        var arr = getHistoryData();
+    // 将历史数据渲染到html结构中
+    function renderHistory(){
+        var historyData = getHistoryData();
+        var html = template("historyDataTemp",{"list":historyData});
+        $(".historyData").html(html);
+    }
 
-        /*1.在正常的10条记录内 正常添加*/
-        /*2.已经10条记录了    添加一条 并且 删除最早的一条 */
-        /*3.如果有相同记录    添加一条 并且 删除相同的一条 */
-        /*是否有相同数据*/
-        var isHave = false;
-        var haveIndex;
-        for(var i = 0 ; i < arr.length ; i ++){
-            if(key == arr[i]){
-                isHave = true;
-                haveIndex = i;
+    renderHistory();
+
+    // 搜索按钮功能
+    // 1.实现页面的跳转：传入用户搜索关键字
+    // 2.将当前搜索关键字添加到localStorage中
+        // 2.1 如果输入重复值：先删除再添加
+        // 2.2 如果数量超过10条，则删除最先添加的再添加当前关键字
+        // 2.3 最后输入的关键字应该在最前面显示
+    $(".searchBtn").on("tap",function(){
+        var value = $(".searchBox input").val();
+        $(".searchBox input").val("");
+        // if(value.trim() == ""){
+        //     return;
+        // }
+        var historyData = getHistoryData();
+
+        // 判断是否有相同的value值存在historyData数组中
+        for(var i = 0; i < historyData.length; i++){
+            //有，找到该值在数组中的index，然后删除旧值,重新添加新的value值
+            if(historyData[i] == value){
+                historyData.splice(i,1);
                 break;
             }
         }
-        if(isHave){
-            /*3.如果有相同记录*/
-            arr.push(key);
-            /*删除*/
-            arr.splice(haveIndex,1);
-        }else{
-            if(arr.length < 10){
-                /*1.在正常的10条*/
-                arr.push(key);
-            }else{
-                /*已经10条记录*/
-                arr.push(key);
-                /*清除第一条*/
-                arr.splice(0,1);
-            }
+
+        // 判断数量是否超出指定的限制，如果是则删除最先添加的数据-索引0对应的数据
+        if(historyData.length > 10){
+            historyData.splice(0,1);
         }
-        /*存起来*/
-        localStorage.setItem('leTaoHistory',JSON.stringify(arr));
-        /*跳转搜索列表*/
-        location.href = 'searchList.html?key='+key;
+
+        historyData.push(value);
+        // console.log(historyData);
+        localStorage.setItem("historyData",JSON.stringify(historyData));
+
+        location.href = "./searchList.html?proName="+value;
+        renderHistory();
     });
 
-    /*3删除记录*/
-    $('.lt_history').on('tap','.mui-icon',function(){
-        /*1.获取索引*/
-        var index = $(this).attr('data-index');
-        /*2.获取数据*/
-        var arr = getHistoryData();
-        /*3.删除数据*/
-        arr.splice(index,1);
-        /*4.存储数据*/
-        localStorage.setItem('leTaoHistory',JSON.stringify(arr));
-        /*5.重新渲染*/
-        $('.lt_history').html(template('historyTpl',{list:arr}));
+    // 删除单个历史记录
+    $(".historyData").on("tap",".fa-close",function(){
+        var index = $(this).parent().data("index");
+        console.log(index);
+        var historyData = getHistoryData();
+        historyData.splice(index,1);
+        localStorage.setItem("historyData",JSON.stringify(historyData));
+        renderHistory();
     });
 
-    /*4清空记录*/
-    $('.lt_history').on('tap','.fa',function(){
-        /*清空数据*/
-        localStorage.setItem('leTaoHistory','');
-        /*重新渲染*/
-        $('.lt_history').html(template('historyTpl',{list:[]}));
+    // 清除所有历史记录
+    $(".clearAllHis").on("tap",function(){
+        localStorage.setItem("historyData",'[]');
+        renderHistory();
+    });
+
+    // 点击搜索历史记录直接搜索
+    $(".historyData").on("tap",".historyContent",function(){
+        $(".searchBox input").val($(this).text());
+        $(".searchBtn").trigger("tap");
     });
 
 });
-/*获取存储数据*/
-var getHistoryData = function(){
-    /*1.约定一个键  leTaoHistory 值存的是json格式的字符串*/
-    /*2.通过这个键获取值 如果有就使用 如果没有默认空数组的字符串*/
-    var str = localStorage.getItem('leTaoHistory')||'[]';
-    /*3.转成成js数据*/
-    var arr = JSON.parse(str);
-    /*4.返回js可操作的数组*/
-    return arr;
-}

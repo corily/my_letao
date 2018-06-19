@@ -1,62 +1,82 @@
-.lt_cateLeft{
-    width: 90px;
-    height: 100%;
-    overflow: hidden;
-    float: left;
-}
-.lt_cateLeft ul{
-    width: 100%;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-.lt_cateLeft ul li {
-    width: 100%;
-    height: 50px;
-    line-height: 50px;
-    border-bottom: 1px solid #ccc;
-    border-right: 1px solid #ccc;
-    background: #f3f4f5;
-}
-.lt_cateLeft ul li:last-child{
-    border-bottom: none;
-}
-.lt_cateLeft ul li a{
-    display: block;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    color: #666;
-}
-.lt_cateLeft ul li.now{
-    background: #fff;
-    border-right-color: #fff;
+.lt_hCenter > input {
+  background-color: #fff;
+  height: 30px;
+  margin-bottom: 0;
+  padding: 0;
+  color: #000;
+  font-weight: 400;
 }
 
-.lt_cateRight{
-    height: 100%;
-    overflow: hidden;
+.lt_main > .lt_cLeft, .lt_main > .lt_cRight {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
 }
-.lt_cateRight ul{
-    list-style: none;
-    margin: 0;
-    padding: 0;
+
+.lt_main > .lt_cLeft {
+  float: left;
+  width: 90px;
 }
-.lt_cateRight ul li{
-    width: 33.3333%;
-    float: left;
+
+.lt_main > .lt_cLeft ul > li {
+  height: 50px;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
 }
-.lt_cateRight ul li a{
-    display: block;
-    width: 100%;
+
+.lt_main > .lt_cLeft ul > li > a {
+  display: block;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  color: #111;
 }
-.lt_cateRight ul li a img{
-    display: block;
-    width: 62px;
-    height: 62px;
-    margin: 0 auto;
+
+.lt_main > .lt_cLeft ul > li.active {
+  border-right: 0;
 }
-.lt_cateRight ul li a p{
-    text-align: center;
-    padding: 5px 0;
+
+.lt_main > .lt_cLeft ul > li.active > a {
+  color: #f00;
 }
+
+.lt_main > .lt_cRight {
+  overflow: hidden;
+}
+
+.lt_main > .lt_cRight ul {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.lt_main > .lt_cRight ul > span {
+  display: block;
+  width: 100%;
+  margin: 20px 0;
+  text-align: center;
+  font-size: 14px;
+  color: #444;
+}
+
+.lt_main > .lt_cRight ul > li {
+  width: 33.33%;
+  margin-bottom: 8px;
+}
+
+.lt_main > .lt_cRight ul > li > a {
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+
+.lt_main > .lt_cRight ul > li > a > img {
+  display: block;
+  width: 100%;
+}
+
+.lt_main > .lt_cRight ul > li > a > p {
+  color: #000;
+  font-size: 13px;
+}
+/*# sourceMappingURL=category.css.map */

@@ -1,57 +1,70 @@
-/*search form*/
-.lt_search{
-    margin-top: 10px;
-    padding: 0 10px;
-}
-.lt_search form{
-    position: relative;
-}
-.lt_search form .search_input{
-    background: #fff;
-    border: 1px solid #069;
-    text-align: left;
-    font-size: 12px;
-}
-.lt_search form .search_btn{
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 60px;
-    height: 34px;
-    background: #069;
-    text-align: center;
-    line-height: 34px;
-    color: #fff;
-    font-size: 12px;
-    border-radius: 0 6px 6px 0;
+.lt_main {
+  width: 100%;
 }
 
-/* search history */
-.lt_history{
-    font-size: 12px;
-    padding: 0 10px;
-    color: #999;
-    padding-bottom: 50px;
+.lt_main > .searchBox {
+  margin: 10px;
+  position: relative;
+  border: 1px solid #1a70a6;
+  overflow: hidden;
+  border-radius: 6px;
 }
-.lt_history .fa-trash{
-    height: 21px;
-    line-height: 21px;
+
+.lt_main > .searchBox > input, .lt_main > .searchBox a {
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
 }
-.lt_history ul{
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    border-bottom: 1px dashed #ccc;
-    margin-top: 10px;
+
+.lt_main > .searchBox > input[type="search"] {
+  float: left;
+  width: 80%;
+  background-color: #fff;
+  outline: none;
+  text-align: left;
 }
-.lt_history ul li{
-    border: 1px dashed #ccc;
-    height: 30px;
-    line-height: 30px;
-    border-bottom: none;
-    padding-left: 10px;
+
+.lt_main > .searchBox > a {
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  border: 0;
+  color: #fff;
+  font-size: 16px;
+  background-color: #1a70a6;
 }
-.lt_history ul li .mui-icon-closeempty{
-    float: right;
-    margin-top: 2px;
+
+.lt_main > .historyTips {
+  width: 100%;
+  font-size: 11px;
+  color: #999;
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
 }
+
+.lt_main > .historyData {
+  width: 100%;
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+.lt_main > .historyData > li {
+  width: 100%;
+  height: 25px;
+  line-height: 25px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed #ccc;
+}
+
+.lt_main > .historyData > li > a {
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+  color: #333;
+}
+/*# sourceMappingURL=search.css.map */

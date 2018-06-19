@@ -1,0 +1,83 @@
+// 公共样式
+html,body,div,p,span,a,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,img,input,form{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+ul{
+    list-style: none;
+}
+
+html,body{
+    width: 100%;
+    height: 100%;
+    max-width: 640px;
+    min-width: 320px;
+    margin: 0 auto;
+}
+
+.lt_layout{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.lt_header,.lt_footer{
+    position: absolute;
+    left: 0;
+    height: 45px;
+    width: 100%;
+    background-color: #1a70a6;
+}
+
+.lt_header{
+    top: 0;
+    z-index: 99;
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    >.lt_hLeft,>.lt_hRight{
+        width: 45px;
+        height: 100%;
+        line-height: 45px;
+        color: #fff;
+        font-size: 21px;
+    }
+    >.lt_hCenter{
+        line-height: 45px;
+        height: 100%;
+        flex: 1;
+    }
+}
+
+.lt_main{
+    width: 100%;
+    height: 100%;
+    padding: 45px 0;
+    background-color: #fff;
+    position: relative;
+}
+
+.lt_footer{
+    bottom: 0;
+    display: flex;
+    padding: 3px 0;
+    font-size: 18px;
+    >a{
+        flex: 1;
+        color: #fff;
+        text-align: center;
+        >p{
+            color: #fff;
+        }
+        &.active{
+            color: #ffa500;
+            >p{
+                color: #ffa500;
+            }
+        }
+    }
+}

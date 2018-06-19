@@ -1,44 +1,32 @@
-/*·â×°¹¤¾ßº¯Êı*/
-window.lt = {};
-/*»ñÈ¡µØÖ·À¸²ÎÊı*/
-lt.getUrlParams = function(){
-    /*ÄÃµ½ÒÔgetĞÎÊ½´«µİµÄµØÖ·À¸µÄÊı¾İ ?key=1&name=10*/
-    var search = location.search;
-    /*ĞèÒª°Ñ×Ö·û´®×ª»»³É¶ÔÏó  ±ãÓÚ¿ª·¢Ê¹ÓÃ*/
-    var params = {};
-    /*Èç¹ûÓĞ£¿´ú±íÓĞ²ÎÊı*/
-    /*Ã»ÓĞÎÊºÅ¾ÍÃ»ÓĞ²ÎÊı*/
-    if(search.indexOf('?') == 0){
-        search = search.substr(1);
-        var arr = search.split('&');
-        for(var i = 0 ; i < arr.length ; i++){
-            /*itemArr name=10  ----> [name,10]*/
-            var itemArr = arr[i].split('=');
-            params[itemArr[0]] = itemArr[1];
+//åŒºåŸŸæ»šåŠ¨åˆå§‹åŒ–
+mui('.mui-scroll-wrapper').scroll({
+    deceleration: 0.0005, //flick å‡é€Ÿç³»æ•°ï¼Œç³»æ•°è¶Šå¤§ï¼Œæ»šåŠ¨é€Ÿåº¦è¶Šæ…¢ï¼Œæ»šåŠ¨è·ç¦»è¶Šå°ï¼Œé»˜è®¤å€¼0.0006
+    indicators:false //éšè—æ»šåŠ¨æ¡
+});
+
+
+//è½®æ’­å›¾åˆå§‹åŒ–
+mui('.mui-slider').slider({
+  interval:5000//è‡ªåŠ¨è½®æ’­å‘¨æœŸï¼Œè‹¥ä¸º0åˆ™ä¸è‡ªåŠ¨æ’­æ”¾ï¼Œé»˜è®¤ä¸º0ï¼›
+});
+
+// å•å‡»åº•éƒ¨å¯¼èˆªçš„æ•ˆæœ
+$(".lt_footer>a").on("tap",function(){
+    $(this).addClass("active").siblings().removeClass("active");
+});
+
+// è·å–åœ°å€æ çš„å‚æ•°,data = location.search  ?key1=value1&key2=value2, è¿›è¡Œä¸¤æ¬¡åˆ‡å‰² & =
+var ltParamter = {
+    getParamter:function(str){
+        str = str.slice(1);//å»æ‰ ï¼Ÿ
+        var data = {};
+        var arr = str.split("&");//ç”¨ & åˆ‡å‰²æˆæ•°ç»„
+
+        for(var i = 0; i < arr.length; i++){
+            //ç”¨ = åˆ‡å‰²æˆæ•°ç»„
+            var final = arr[i].split("=");
+            data[final[0]] = final[1];
         }
+        return data;
     }
-    return params;
-}
-/*µÇÂ¼À¹½Ø  ·²ÊÂĞèÒªµÇÂ¼²Ù×÷ µ÷ÓÃ*/
-lt.ajaxFilter = function(options){
-    $.ajax({
-        type:options.type||'get',
-        url:options.url||location.pathname,
-        data:options.data||{},
-        dataType:options.dataType||'json',
-        beforeSend:function(){
-            options.beforeSend && options.beforeSend();
-        },
-        success:function(data){
-            /* error Èç¹û  400  ´ú±íÎ´µÇÂ¼ È¥µÇÂ¼Ò³  Ğ¯´øurl*/
-            if(data.error == 400){
-                location.href = '/m/user/login.html?returnUrl='+location.href
-            }else{
-                options.success && options.success(data);
-            }
-        },
-        error:function(){
-            options.error && options.error();
-        }
-    });
-}
+};
