@@ -1,0 +1,15 @@
+.lti_right_bottom {
+  padding: 20px;
+  text-align: right;
+}
+
+.lti_right_bottom table {
+  width: 100%;
+}
+
+.lti_right_bottom table th, .lti_right_bottom table td {
+  text-align: center;
+  padding: 10px 0;
+  border: 1px solid #ddd;
+}
+/*# sourceMappingURL=userManager.css.map */

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>乐淘-后台管理系统</title>
+    <link rel="shortcut icon" href="./images/favicon.ico">
+    <link href="./assets/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/userManager.css">
+    <!--[if lt IE 9]>
+      <script src="./assets/html5shiv/html5shiv.min.js"></script>
+      <script src="./assets/respond/respond.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="main">
+        <!-- 动态生成公共左边部分 -->
+        <div class="lti_left">
+            <a class="lti_left_top" href="index.html">ITCAST</a>
+            <div class="lti_left_center userInfo">
+                <img src="./images/admin.jpg" alt="">
+                <a href="javascript:;">超级管理员</a>
+            </div>
+            <ul class="lti_left_bottom">
+                <li class="active">
+                    <a class="glyphicon glyphicon-user" href="userManager.html">用户管理</a>
+                </li>
+                <li>
+                    <a class="glyphicon glyphicon-th-list" href="javascript:;" >分类管理</a>
+                    <ul class="secondCategory">
+                        <li><a href="firstCategoryManage.html">一级分类管理</a></li>
+                        <li><a href="secondCategoryManage.html">二级分类管理</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="glyphicon glyphicon-tags" href="productManage.html">商品管理</a>
+                </li>
+            </ul>
+        </div>
+        <div class="lti_right">
+            <!-- 动态生成公共顶部 -->
+            <div class="lti_right_top">
+                <a class="glyphicon glyphicon-menu-hamburger" href="javascript:;"></a>
+                <a class="glyphicon glyphicon-log-out exitBtn" href="javascript:;"></a>
+            </div>
+
+            <div class="lti_right_center">
+                <ol class="breadcrumb">
+                    <li><a href="#">管理系统</a></li>
+                    <li class="active">首页</li>
+                </ol>
+            </div>
+
+            <div class="lti_right_bottom">
+                <table>
+                    <thead>
+                        <th>编号</th>
+                        <th>用户名</th>
+                        <th>电话</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </thead>
+                    <tbody>
+                        <!-- 动态生成 -->
+                    </tbody>
+                </table>
+
+                <!-- 分页结构，结合bootstrap的版本号，来选择其结构 3.X 版本用ul，2.x用div -->
+                <ul class="pagination"></ul>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框 -->
+    <div class="modal fade bs-example-modal-sm userModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">温馨提示</h4>
+                </div>
+            <div class="modal-body">
+                <p>确定要修改用户的启停状态吗？</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary userResureBtn">确定</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 用户信息模板 -->
+    <script type="text/template" id="userInfoTemp">
+        <% for(var i = 0; i < rows.length; i++){ %>
+            <tr>
+                <td><%= (page-1)*size+i+1 %></td>
+                <td><%= rows[i].username %></td>
+                <td><%= rows[i].mobile %></td>
+                <td class="userStatus"><%= rows[i].isDelete == 1 ? "已禁用" : "已启用" %></td>
+                <td>
+                    <button type="button" class="btn <%= rows[i].isDelete == 1 ? "btn-info" : "btn-danger" %>" data-id="<%= rows[i].id %>"><%= rows[i].isDelete == 1 ? "启用" : "禁用" %></button>
+                </td>
+            </tr>
+        <% } %>
+    </script>
+    
+    <script src="./assets/jquery/jquery.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap.js"></script>
+    <script src="./assets/artTemplate/template-native.js"></script>
+    <script src="./assets/bootstrap-paginator/bootstrap-paginator.min.js"></script>
+    <script src="./js/common.js"></script>
+    <script src="./js/userManager.js"></script>
+  </body>
+</html>

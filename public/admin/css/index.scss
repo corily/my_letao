@@ -1,0 +1,18 @@
+
+.lti_right_bottom{
+    width: 100%;
+    height: 70%;
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    >.lti_right_bottomLeft{
+        flex: 1;
+        height: 100%;
+        padding-right: 20px;
+    }
+    >.lti_right_bottomRight{
+        flex: 1;
+        height: 100%; 
+    }
+}

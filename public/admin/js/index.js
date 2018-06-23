@@ -1,47 +1,50 @@
 $(function(){
-    /*1.注册人数  数据可视化*/
-    /*1.1准容器渲染图标*/
-    /*1.2准备数据 */
-    /*1.3引入核心echarts文件*/
-    /*1.4获取dom容器*/
-    var firstDom = document.querySelector('.picTable:first-child');
-    /*1.5初始化dom容器*/
-    var firstCarts = echarts.init(firstDom);
-    /*1.6进行配置和导入数据*/
-    var option = {
-        /*图标的标题*/
+
+    // $(".lti_left").load("left.html");
+    // $(".lti_right_top").load("top.html");
+
+
+    // 基于准备好的dom，初始化echarts实例
+    var myChart1 = echarts.init(document.querySelector('.lti_right_bottomLeft'));
+
+    // 初始化柱状图
+    var option1 = {
         title: {
-            text: '2017年注册人数'
+            text: '2018年注册人数'
         },
         tooltip: {},
         legend: {
             data:['人数']
         },
         xAxis: {
-            data: ["1月","2月","3月","4月","5月","6月"]
+            data: ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"]
         },
         yAxis: {},
         series: [{
             name: '人数',
             type: 'bar',
-            data: [1000, 2000, 3600, 1400, 1200, 2220]
+            data: [500, 2000, 3600, 1000, 1000, 2500,1290,1828,3000,4500,2500,2800,3600]
         }]
     };
-    /*1.7 渲染图标*/
-    firstCarts.setOption(option);
 
-    /*2.品牌销量  数据可视化*/
-    var secondDom = document.querySelector('.picTable:last-child');
-    var secondCarts = echarts.init(secondDom);
-    var secondOption = {
+    // 使用刚指定的配置项和数据显示图表。
+    myChart1.setOption(option1);
+
+
+
+    // 基于准备好的dom，初始化echarts实例
+    var myChart2 = echarts.init(document.querySelector('.lti_right_bottomRight'));
+    
+    // 初始化圆饼状图
+    var option2 = {
         title : {
             text: '热门品牌销售',
-            subtext: '2017年6月',
+            subtext: '2018年1月',
             x:'center'
         },
         tooltip : {
             trigger: 'item',
-            formatter: "{b} : {c} ({d}%)"
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
         },
         legend: {
             orient: 'vertical',
@@ -71,5 +74,9 @@ $(function(){
             }
         ]
     };
-    secondCarts.setOption(secondOption);
-})
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart2.setOption(option2);
+
+
+});

@@ -23,11 +23,11 @@ $(function(){
         // 2.2 如果数量超过10条，则删除最先添加的再添加当前关键字
         // 2.3 最后输入的关键字应该在最前面显示
     $(".searchBtn").on("tap",function(){
-        var value = $(".searchBox input").val();
+        var value = $(".searchBox > input").val();
         $(".searchBox input").val("");
-        // if(value.trim() == ""){
-        //     return;
-        // }
+        if(value.trim() == ""){
+            return;
+        }
         var historyData = getHistoryData();
 
         // 判断是否有相同的value值存在historyData数组中
@@ -48,7 +48,8 @@ $(function(){
         // console.log(historyData);
         localStorage.setItem("historyData",JSON.stringify(historyData));
 
-        location.href = "./searchList.html?proName="+value;
+        location.href = "./searchList.html?proName=" + value;
+        // alert("./searchList.html?proName="+value);
         renderHistory();
     });
 

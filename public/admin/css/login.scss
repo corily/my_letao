@@ -1,0 +1,87 @@
+html,body{
+    width: 100%;
+    height: 100%;
+}
+.main{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: #2f4050;
+    >.loginBox{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 500px;
+        height: 350px;
+        padding: 30px;
+        background-color: #fff;
+        box-sizing: border-box;
+        >.form-horizontal{
+            margin-top: 80px;
+            box-sizing: border-box;
+            .form-group{
+                padding: 10px 0;
+                .col-sm-12{
+                    position: relative;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                    padding: 0;
+                    height: 40px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    box-sizing: border-box;
+                    overflow: hidden;
+                    .glyphicon{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 40px;
+                        height: 39px;
+                        padding: 0;
+                        background-color: #eee;
+                        border-right: 1px solid #ccc;
+                    }
+                    .col-sm-10{
+                        flex: 1;
+                        border: 0;
+                        outline: none;
+                        height: 100%;
+                    }
+                }
+                .btn-login{
+                    width: 100%;
+                    height: 38px;
+                    color: #fff;
+                    background-color: #337ab7;
+                    border-color: #2e6da4;
+                    &:hover{
+                        border-color: #204d74;
+                        background-color: #286090;
+                    }
+                }
+            }
+        }
+        >.imgBox{
+            position: absolute;
+            top: -75px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 150px;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            overflow: hidden;
+            background-color: #eee;
+            >img{
+                box-sizing: border-box;
+                padding: 5px;
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                display: block;
+            }
+        }
+    }
+}

@@ -51,6 +51,7 @@ $(function(){
         }
     });
 
+    
     function proDataRender(data){
         $.ajax({
             type:"get",
@@ -58,7 +59,7 @@ $(function(){
             data:data,
             dataType:"json",
             success:function(res){
-                // console.log(res);
+                console.log(res);
                 var html = template("productDataTemp",res);
                 $(".lt_mproduct>ul").html(html);
             }
@@ -73,6 +74,11 @@ $(function(){
 
     // 3.单击实现排序,获取对应的排序自定义属性order的值以及span所对应的 fa-angle-up(1：升序) / fa-angle-down(2：降序)
     $(".filterPro>a").on("tap",function(){
+
+        page = 1;
+        //重置上拉加载
+        mui('#refreshContainer').pullRefresh().refresh(true);
+
         var data = {
             "page":page,
             "pageSize":pageSize,
