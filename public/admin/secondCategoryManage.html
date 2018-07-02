@@ -13,6 +13,29 @@
       <script src="./assets/html5shiv/html5shiv.min.js"></script>
       <script src="./assets/respond/respond.js"></script>
     <![endif]-->
+    <style>
+        .firstCateName{
+            margin: 10px 0;
+        }
+        .uploadFileBtn{
+            position: relative;
+            width: 120px;
+            height: 30px;
+        }
+        input[type=file]{
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left:0;
+            width: 120px;
+            height: 30px;
+        }
+        .modal-body img{
+            width: 100px;
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
   </head>
   <body>
     <div class="main">
@@ -49,7 +72,7 @@
             <div class="lti_right_center">
                 <ol class="breadcrumb">
                     <li><a href="#">管理系统</a></li>
-                    <li class="active">首页</li>
+                    <li class="active">二级分类</li>
                 </ol>
             </div>
 
@@ -78,54 +101,58 @@
     <div class="modal fade bs-example-modal-lg secondCateModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">添加品牌</h4>
-                </div>
-            <div class="modal-body">
+                <form action="">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">添加品牌</h4>
+                    </div>
+                    <div class="modal-body">
+                        请选择分类:
+                        <div class="btn-group">
 
-                <div class="btn-group">
-                    <span>请选择分类</span>
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <!-- <li role="separator" class="divider"></li> -->
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </div>
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="selectFirstCateName">请选择分类</span>
+                                <span class="caret"></span>
+                                <input type="hidden" name="categoryId" class="categoryId">
+                            </button>
+                            <ul class="dropdown-menu">
 
-                <input type="text" class="form-control firstCateName" placeholder="请输入品牌名称">
-                <a href="javascript:;" class="btn btn-default"><input type="file"></a>
+                            </ul>
+                        </div>
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary secondSaveBtn">保存</button>
-            </div>
+                        <input type="text" class="form-control firstCateName" name="brandName" placeholder="请输入品牌名称">
+                        <a href="javascript:;" class="btn btn-default uploadFileBtn"><input type="file" id="fileupload" name="pic1" data-url="/category/addSecondCategoryPic">请选择上传文件</a>
+                        <input type="hidden" class="brandLogo" name="brandLogo" value="">
+                        <img class="scateImg" src="./images/none.png" alt="">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary secondSaveBtn">保存</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
     <!-- 用户信息模板 -->
     <script type="text/template" id="secondCateTemp">
-        <% for(var i = 0; i < rows.length; i++){ %>
-            <tr>
-                <td><%= (page-1)*size+i+1 %></td>
-                <td><%= rows[i].brandName %></td>
-                <td style="padding:0;"><img src="<%= rows[i].brandLogo %>" alt=""></td>
-                <td><%= rows[i].categoryName %></td>
+        {{ each rows as value index }}
+            <tr data-id="{{ value.id }}">
+                <td>{{ (page-1)*size+index+1 }}</td>
+                <td>{{ value.brandName }}</td>
+                <td style="padding:0;"><img src="{{ value.brandLogo }}" alt="" width="100px;"></td>
+                <td>{{ value.categoryName }}</td>
             </tr>
-        <% } %>
+        {{ /each }}
     </script>
     
     <script src="./assets/jquery/jquery.js"></script>
     <script src="./assets/bootstrap/js/bootstrap.js"></script>
-    <script src="./assets/artTemplate/template-native.js"></script>
+    <script src="./assets/artTemplate/template.js"></script>
     <script src="./assets/bootstrap-paginator/bootstrap-paginator.min.js"></script>
+    <script src="./assets/jquery-fileupload/jquery.ui.widget.js"></script>
+    <script src="./assets/jquery-fileupload/jquery.iframe-transport.js"></script>
+    <script src="./assets/jquery-fileupload/jquery.fileupload.js"></script>
     <script src="./js/common.js"></script>
      <script src="./js/secondCategoryManage.js"></script> 
   </body>
